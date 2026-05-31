@@ -210,3 +210,4 @@ test.describe('Bonus', () => {
     ).toHaveText('Sauce Labs Backpack');
   });
 });
+
