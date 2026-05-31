@@ -31,7 +31,7 @@ test.describe('Login', () => {
     await expect(page, 'User should stay on login page').not.toHaveURL(/inventory/);
   });
 
-  test('Task 2b — locked_out_user sees specific error message', async ({ page }) => {
+  test.only('Task 2b — locked_out_user sees specific error message', async ({ page }) => {
   await login(page, 'locked_out_user', VALID_PASS);
 
   await expect(
