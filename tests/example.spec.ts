@@ -20,3 +20,5 @@ test('get started link', async ({ page }) => {   // Test to check if the "Get st
   // Expects page to have a heading with the name of Installation.
   await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
 });
+
+// Say hello to the merge conflict azazaza
