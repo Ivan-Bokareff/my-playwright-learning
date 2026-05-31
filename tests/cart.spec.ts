@@ -21,7 +21,6 @@ test.describe("Cart", () => {
 
   test("cart badge shows correct count after adding a product", async () => {
     await inventoryPage.addProductToCart("sauce-labs-backpack");
-
     await expect(
       inventoryPage.cartBadge,
       "Cart badge should show 1 after adding one product"
@@ -31,7 +30,6 @@ test.describe("Cart", () => {
   test("cart page shows name of selected product", async ({ page }) => {
     await inventoryPage.addProductToCart("sauce-labs-backpack");
     await inventoryPage.openCart();
-
     await expect(page).toHaveURL(/cart/);
     await expect(
       cartPage.itemName,
@@ -42,9 +40,7 @@ test.describe("Cart", () => {
   test("removing a product hides the cart badge", async () => {
     await inventoryPage.addProductToCart("sauce-labs-backpack");
     await expect(inventoryPage.cartBadge).toHaveText("1");
-
     await inventoryPage.removeProductFromCart("sauce-labs-backpack");
-
     await expect(
       inventoryPage.cartBadge,
       "Cart badge should disappear after removing product"
@@ -54,10 +50,28 @@ test.describe("Cart", () => {
   test("adding multiple products shows correct badge count", async () => {
     await inventoryPage.addProductToCart("sauce-labs-backpack");
     await inventoryPage.addProductToCart("sauce-labs-bike-light");
-
     await expect(
       inventoryPage.cartBadge,
       "Cart badge should show 2 after adding two products"
     ).toHaveText("2");
   });
-});
+
+ 
+  test("user can sort products by price low to high", async () => {
+    await inventoryPage.sortBy("lohi");
+
+    const priceElements = await inventoryPage.page
+      .locator(".inventory_item_price")
+      .allTextContents();
+
+    const prices = priceElements.map((p) => parseFloat(p.replace("$", "")));
+
+    for (let i = 0; i < prices.length - 1; i++) {
+      expect(
+        prices[i],
+        `Price at position ${i} should be less than or equal to next`
+      ).toBeLessThanOrEqual(prices[i + 1]);
+    }
+  });
+
+}); 
