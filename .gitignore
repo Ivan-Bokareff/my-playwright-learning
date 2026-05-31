@@ -8,6 +8,4 @@ node_modules/
 /playwright/.auth/
 .env
 .env.local
-.env.*.local.DS_Store
-.vscode/
-debug-screenshot.png
+.env.*.local
