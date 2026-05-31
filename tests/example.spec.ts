@@ -20,3 +20,5 @@ test('get started link', async ({ page }) => {   // Test to check if the "Get st
   // Expects page to have a heading with the name of Installation.
   await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
 });
+
+// Note: The above tests are basic examples. In a real-world scenario, you would likely have more complex tests that interact with various elements on the page and verify different functionalities.
