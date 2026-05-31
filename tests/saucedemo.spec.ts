@@ -31,6 +31,15 @@ test.describe('Login', () => {
     await expect(page, 'User should stay on login page').not.toHaveURL(/inventory/);
   });
 
+  test('Task 2b — locked_out_user sees specific error message', async ({ page }) => {
+  await login(page, 'locked_out_user', VALID_PASS);
+
+  await expect(
+    page.getByTestId('error'),
+    'Locked out user should see specific error message'
+  ).toHaveText('Epic sadface: Sorry, this user has been locked out.');
+});
+
   test('Task 5a — empty form shows error', async ({ page }) => {
     await page.getByRole('button', { name: 'Login' }).click();
     await expect(
